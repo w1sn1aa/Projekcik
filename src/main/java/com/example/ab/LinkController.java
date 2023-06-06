@@ -54,8 +54,8 @@ public class LinkController {
         return "redirect:/";
     }
     @PostMapping({"/zapisz"})
-    public String Save(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName, @RequestParam("position") String position, @RequestParam("salary") int salary) {
-        employeeManager.addEmployee(firstName, lastName, position, salary);
+    public String Save(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName, @RequestParam("position") String position, @RequestParam("salary") int salaryy) {
+        employeeManager.addEmployee(firstName, lastName, position, salaryy);
         return "redirect:/form";
     }
 
