@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj Pracownika</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}" />
+</head>
+
+<body>
+<nav class="site-navbar">
+    <span class="site-brand px-3">Strona zarzadania pracownikami</span>
+    <div class="site-navbar" id="navbarNav">
+        <ul class="site-nav">
+            <li class="site-nav-item">
+                <a class="site-nav-link active" href="/">Lista</a>
+            </li>
+            <li class="site-nav-item">
+                <a class="site-nav-link" href="/form">Dodaj pracownika</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="site-content">
+    <h2 class="site-heading">Edycja Employee</h2>
+
+    <form class="site-form" method="post" th:action="@{'/aktualizuj/'+${employee.employeeID}}">
+        <input th:field="${employee.employeeID}" type="hidden" />
+        <label class="site-label" for="position">Position:</label><br>
+        <input id="position" required th:field="${employee.position}" type="text" class="site-input-text" /><br>
+        <label class="site-label" for="salary">Salary:</label><br>
+        <input id="salary" required th:field="${employee.salary}" type="number" class="site-input-number" /><br>
+        <br>
+        <button class="site-btn-primary" type="submit">Save</button>
+    </form>
+</div>
+</body>
+
+</html>

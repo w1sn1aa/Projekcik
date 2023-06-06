@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        Strona glowna
+    </title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}" />
+</head>
+
+<body>
+<nav class="site-navbar">
+    <span class="site-brand px-3">Strona zarzadania pracownikami</span>
+    <div class="site-navbar" id="navbarNav">
+        <ul class="site-nav">
+            <li class="site-nav-item">
+                <a class="site-nav-link active" href="/">Lista</a>
+            </li>
+            <li class="site-nav-item">
+                <a class="site-nav-link" href="/form">Dodaj pracownika</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<form th:action="@{/szukaj}" method="post">
+    Szukaj po nazwisku<br>
+    <input type="text" name="lastName" placeholder="Wpisz nazwisko"/>
+    <input id="bnt" type="submit" value="Submit">
+</form>
+<div class="container site-container">
+    <table class="site-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry, i : ${employeeManager.listAllEmployees()}">
+            <td th:text="${i.index + 1}"></td>
+            <td th:text="${entry.firstName}"></td>
+            <td th:text="${entry.lastName}"></td>
+            <td th:text="${entry.position}"></td>
+            <td th:text="${entry.salary}"></td>
+            <td>
+                <a th:href="@{/edycja/{id}(id=${entry.employeeID})}" class="site-btn site-btn-primary">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/usun/{id}(id=${entry.employeeID})}" class="site-btn site-btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

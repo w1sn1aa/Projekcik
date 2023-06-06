@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj pracownika</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}" />
+</head>
+
+<body>
+<nav class="site-navbar">
+    <span class="site-brand px-3">Strona zarzadania pracownikami</span>
+    <div class="site-navbar" id="navbarNav">
+        <ul class="site-nav">
+            <li class="site-nav-item">
+                <a class="site-nav-link" href="/">Lista</a>
+            </li>
+            <li class="site-nav-item">
+                <a class="site-nav-link active" href="/form">Dodaj pracownika</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="p-3 d-flex justify-content-center">
+    <form th:action="@{/zapisz}" th:object="${Employee}" method="post" onsubmit="return validateForm()">
+        <label for="firstName">First name:</label><br>
+        <input type="text" th:field="*{firstName}" id="firstName" name="firstName" required />
+        <br />
+
+        <label for="lastName">Last name:</label> <br>
+        <input type="text" th:field="*{lastName}" id="lastName" name="lastName" required />
+        <br />
+
+        <label for="position">Position:</label><br>
+        <input type="text" th:field="*{position}" id="position" name="position" required />
+        <br />
+
+        <label for="salary">Salary:</label><br>
+        <input type="number" min="0" max="100000" th:field="*{salary}" id="salary" name="salary" required />
+        <br />
+        <br>
+        <input class="btn btn-primary" type="submit" value="Submit" />
+    </form>
+
+    <script>
+    function validateForm() {
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var position = document.getElementById("position").value;
+        var salary = document.getElementById("salary").value;
+        var nameRegex = /^[A-Za-z]+$/;
+        var numberRegex = /^\d+$/;
+        if (!firstName.match(nameRegex)) {
+            return false;
+        }
+        if (!lastName.match(nameRegex)) {
+            return false;
+        }
+        if (!position.match(nameRegex)) {
+            return false;
+        }
+        if (!salary.match(numberRegex) || parseInt(salary) < 0) {
+            return false;
+        }
+        return true;
+    }
+</script>
+</div>
+
+</body>
+
+
+</html>
